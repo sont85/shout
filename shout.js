@@ -4,7 +4,7 @@ app.factory("Auth", function($firebaseAuth){
   var ref = new Firebase("https://shouting.firebaseio.com/");
   var auth = $firebaseAuth(ref);
   return $firebaseAuth(ref)
-
+ 
 });
 
 // app.config(function ($routeProvider) {
