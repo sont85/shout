@@ -1,0 +1,20 @@
+{
+  "name": "shout",
+  "main": "shout.js",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angularfire": "~1.1.2",
+    "firebase": "~2.2.7",
+    "angular-route": "~1.4.1"
+  }
+}
