@@ -1,0 +1,19 @@
+
+
+
+
+
+<input type="email" placeholder="email" ng-model="email">
+<input type="password" placeholder="password" ng-model="password">
+<input type="text" placeholder="Full Name" ng-model="name">
+<button ng-click="createUser()">Create User</button>
+
+
+
+
+
+
+
+<button ng-click="loginUser()">Log in</button>
+<p ng-if="message">Message: <strong>{{ message }}</strong></p>
+<p ng-if="error">Error: <strong>{{error}}</strong></p>

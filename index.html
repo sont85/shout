@@ -7,16 +7,7 @@
     <div id="header" class="text-center">
       <h2>Shout{{2+2}}</h2>
     </div>
-    <input type="email" placeholder="email" ng-model="email">
-    <input type="password" placeholder="password" ng-model="password">
-    <input type="text" placeholder="Full Name" ng-model="name">
-    <button ng-click="createUser()">Create User</button>
-    <button>Log in</button>
-
-
-    <p ng-if="message">Message: <strong>{{ message }}</strong></p>
-    <p ng-if="error">Error: <strong>{{ error }}</strong></p>
-
+    <ng-view></ng-view>
 
   </div>
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
@@ -26,6 +17,8 @@
   <script src="bower_components/firebase/firebase.js"></script>
   <script src="bower_components/angularfire/dist/angularfire.js"></script>
   <script src="shout.js"></script>
+  <script src="messageboard.js"></script>
+  <script src="login.js"></script>
 
 </body>
 </html>
