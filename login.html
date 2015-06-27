@@ -1,19 +1,40 @@
+<button data-target="#createUserModal" data-toggle="modal">Create User</button>
+<button data-target="#logInModal" data-toggle="modal">Log In</button>
 
 
+<div class="modal fade" id="logInModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title" id="myModalLabel" class="text-center">Log in</h4>
+			</div>
+			<div class="modal-body">
+				<input type="email" placeholder="email" ng-model="email">
+				<input type="password" placeholder="password" ng-model="password">
+				<button ng-click="loginUser()" data-dismiss="modal">Submit</button>
+			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="modal fade" id="createUserModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title" id="myModalLabel" class="text-center">Create User</h4>
+			</div>
+			<div class="modal-body">
+				<input type="email" placeholder="email" ng-model="email">
+				<input type="password" placeholder="password" ng-model="password">
+				<input type="text" placeholder="Full Name" ng-model="name">
+				<button ng-click="createUser()" data-dismiss="modal">Submit</button>
+			</div>
+		</div> 
+	</div>
+</div>
 
 
-
-<input type="email" placeholder="email" ng-model="email">
-<input type="password" placeholder="password" ng-model="password">
-<input type="text" placeholder="Full Name" ng-model="name">
-<button ng-click="createUser()">Create User</button>
-
-
-
-
-
-
-
-<button ng-click="loginUser()">Log in</button>
 <p ng-if="message">Message: <strong>{{ message }}</strong></p>
 <p ng-if="error">Error: <strong>{{error}}</strong></p>

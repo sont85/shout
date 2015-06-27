@@ -1,5 +1,9 @@
 tweetPage
 <button ng-click="logOut()">Log Out</button>
-Log in as {{authData.password.email}}
+Log in as {{authData.uid}}
 <input type="text" ng-model="tweet">
 <button ng-click="submitTweet()">Submit Tweet</button>
+<input type="text" ng-model="userToFollow">
+<button ng-click="followUser()">Follow</button>
+
+
