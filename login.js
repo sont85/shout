@@ -1,6 +1,6 @@
 app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
   var ref = new Firebase("https://shouting.firebaseio.com/");
-  var usersRef = ref.child("users")
+  var usersRef = ref.child("users");
 
 
   $scope.createUser = function() {
@@ -12,11 +12,11 @@ app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
     })
     .then(function(userData) {
       $scope.message = "User created with uid: " + userData.uid;
-      var activeUserRef = usersRef.child(userData.uid)
-      activeUserRef.set({Followers: ["followers"], Name: $scope.name})
+      var activeUserRef = usersRef.child(userData.uid);
+      activeUserRef.set({Followers: ["followers"], Name: $scope.name});
     })
     .catch(function(error) {
-      console.log(error)
+      console.log(error);
       $scope.error = error;
     });
   };
@@ -28,7 +28,7 @@ app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
       password: $scope.password
     })
     .catch(function(error){
-      console.log(error)
+      console.log(error);
       $scope.error = error.code;
     });
   };

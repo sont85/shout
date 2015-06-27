@@ -1,9 +1,19 @@
-tweetPage
-<button ng-click="logOut()">Log Out</button>
-Log in as {{authData.uid}}
-<input type="text" ng-model="tweet">
-<button ng-click="submitTweet()">Submit Tweet</button>
-<input type="text" ng-model="userToFollow">
-<button ng-click="followUser()">Follow</button>
+<div>
+  <button ng-click="logOut()" class="btn btn-default">Log Out</button>
+</div>
+<div class="panel panel-default">
+	<div class="panel-body">
+		<textarea type="text" ng-model="tweet" rows="3" cols="40" class="form-control" placeholder="Enter Message"></textarea>
+	<div class="pull-right">
+		<span ng-class="{redText: 140 - tweet.length < 0}">{{150 - tweet.length}} Characters Left</span>
+		<button ng-click="submitTweet()" ng-disabled="150 - tweet.length < 0 || tweet.length ===0" class="btn btn-default">Submit Tweet</button>
+	</div>
+	</div>
+</div>
 
-
+	<div class="input-group">
+		<input type="text" ng-model="userToFollow" class="form-control">
+		<span class="input-group-btn">
+			<button ng-click="followUser()" class="btn btn-default">Follow</button>
+		</span>
+	</div>

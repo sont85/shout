@@ -1,5 +1,7 @@
-<button data-target="#createUserModal" data-toggle="modal">Create User</button>
-<button data-target="#logInModal" data-toggle="modal">Log In</button>
+<div class="pull-right">
+	<button class="btn btn-primary" data-target="#createUserModal" data-toggle="modal">Create User</button>
+	<button class="btn btn-success" data-target="#logInModal" data-toggle="modal">Log In</button>
+</div>
 
 
 <div class="modal fade" id="logInModal" role="dialog">
@@ -12,7 +14,7 @@
 			<div class="modal-body">
 				<input type="email" placeholder="email" ng-model="email">
 				<input type="password" placeholder="password" ng-model="password">
-				<button ng-click="loginUser()" data-dismiss="modal">Submit</button>
+				<button ng-click="loginUser()" class="btn btn-success" data-dismiss="modal">Submit</button>
 			</div>
 		</div> 
 	</div>
@@ -26,10 +28,11 @@
 			  <h4 class="modal-title" id="myModalLabel" class="text-center">Create User</h4>
 			</div>
 			<div class="modal-body">
-				<input type="email" placeholder="email" ng-model="email">
+				<input type="email" placeholder="email" ng-model="email" class="form-control">
 				<input type="password" placeholder="password" ng-model="password">
+				<input type="text" placeholder="User Name" ng-model="userName">
 				<input type="text" placeholder="Full Name" ng-model="name">
-				<button ng-click="createUser()" data-dismiss="modal">Submit</button>
+				<button ng-click="createUser()" class="btn btn-success" data-dismiss="modal">Submit</button>
 			</div>
 		</div> 
 	</div>

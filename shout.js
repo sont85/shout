@@ -3,7 +3,6 @@ var app = angular.module("shout", ["firebase", "ngRoute"]);
 app.factory("Auth", function($firebaseAuth){
   var ref = new Firebase("https://shouting.firebaseio.com/");
   return $firebaseAuth(ref)
- 
 });
 
 app.config(function ($routeProvider) {
