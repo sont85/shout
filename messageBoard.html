@@ -1,19 +1,67 @@
+<h3 class='pull-right light-text'>{{userName}}</h3>
 <div>
-  <button ng-click="logOut()" class="btn btn-default">Log Out</button>
+  <button ng-click="logOut()" class="btn btn-default pull-right">Log Out</button>
 </div>
-<div class="panel panel-default">
-	<div class="panel-body">
-		<textarea type="text" ng-model="tweet" rows="3" cols="40" class="form-control" placeholder="Enter Message"></textarea>
-	<div class="pull-right">
-		<span ng-class="{redText: 140 - tweet.length < 0}">{{150 - tweet.length}} Characters Left</span>
-		<button ng-click="submitTweet()" ng-disabled="150 - tweet.length < 0 || tweet.length ===0" class="btn btn-default">Submit Tweet</button>
-	</div>
+<div>
+	<h3 class="light-text">Welcome {{name}}</h3>
+</div>
+<button class="btn btn-primary" data-target="#tweetModal" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Tweet</button>
+
+<div id="tweetModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			  <h4 class="modal-title" id="myModalLabel">Tweet New Message</h4>
+			</div>
+			<div class="modal-body">
+				<textarea type="text" ng-model="tweet" rows="3" cols="40" class="form-control" placeholder="Enter Message"></textarea>
+			</div>
+			<div class="modal-footer">
+				<span ng-class="{redText: 140 - tweet.length < 0}">{{150 - tweet.length}} Characters Left</span>
+				<button class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-default" ng-click="submitTweet()" ng-disabled="150 - tweet.length < 0 || !tweet" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-pencil"></span> Tweet</button>
+			</div>
+		</div>
 	</div>
 </div>
 
+<div>
+	<div class="panel">
+		<input type="text" ng-model="tweetSearch">
+		<div class="panel-heading"><h4 class="text-center panel-title">Tweets</h4></div>
+		<ul class="list-group">
+			<li ng-repeat="(key,tweet) in tweets | filter: tweetSearch" class="list-group-item">
+				{{tweet}}
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div class="panel">
 	<div class="input-group">
-		<input type="text" ng-model="userToFollow" class="form-control">
+		<input type="text" ng-model="userToFollow" class="form-control" placeholder="User Name to Follow">
 		<span class="input-group-btn">
-			<button ng-click="followUser()" class="btn btn-default">Follow</button>
+			<button ng-click="followUser()" class="btn btn-primary">Follow</button>
 		</span>
 	</div>
+</div>
+
+<div class="panel">
+	<div class="panel-heading"><h4 class="text-center panel-title">Follow List</h4></div>
+	<ul class="list-group">
+		<li ng-repeat="people in following" class="list-group-item">
+			{{people}}
+		</li>
+	</ul>
+</div>
+
+
+<div class="panel">
+	<div class="panel-heading"><h4 class="text-center panel-title">Followers</h4></div>
+	<ul class="list-group">
+		<li ng-repeat="follower in followers" class="list-group-item">
+			{{follower}}
+		</li>
+	</ul>
+</div>

@@ -2,7 +2,19 @@ var app = angular.module("shout", ["firebase", "ngRoute"]);
 
 app.factory("Auth", function($firebaseAuth){
   var ref = new Firebase("https://shouting.firebaseio.com/");
-  return $firebaseAuth(ref)
+  return $firebaseAuth(ref);
+});
+
+app.factory("usersObject", function($firebaseObject){
+  var ref = new Firebase("https://shouting.firebaseio.com/");
+  var usersRef = ref.child("users");
+  return $firebaseObject(usersRef);
+});
+
+app.factory("usersArray", function($firebaseArray) {
+  var ref = new Firebase("https://shouting.firebaseio.com/");
+  var usersRef = ref.child("users");
+  return $firebaseArray(usersRef);
 });
 
 app.config(function ($routeProvider) {
@@ -32,14 +44,14 @@ app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $lo
     if (authData) {
       console.log("onAuth");
       $rootScope.authData = authData;
+      $rootScope.uid = authData.uid;
+      console.log($rootScope.uid);
       console.log(authData);
-      $location.url("/messageboard")
-      $rootScope.activeUser = {email: $scope.email, name: $scope.name}
-
+      $location.url("/messageboard");
     } else {
-      console.log("offAuth")
+      console.log("offAuth");
     }
-  })
+  });
 });
 
 

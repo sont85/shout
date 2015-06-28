@@ -1,6 +1,19 @@
 body {
-	background: #ABC889
+	background-image: url("http://7818-presscdn-0-76-pagely.netdna-ssl.com/wp-content/uploads/2014/01/photodune-3580063-wooden-surface-m.jpg");
+	background-size: cover;
+	font-family: lato;
 }
 .redText {
 	color: red;
+}
+.panel {
+	background-color: #444444;
+	background-size: cover;
+}
+.panel-heading {
+	background-color: #2D3630;
+	color: white;
+}
+.list-group-item{
+	background-color: #AAA !important;
 }
