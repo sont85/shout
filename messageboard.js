@@ -1,5 +1,16 @@
-app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsArray, likeArray, Auth, $scope, $location, $rootScope, $firebaseObject, $firebaseArray) {
+app.controller("MessageBoardCtrl", function(usersObject, tweetsObject, marked , followingArray, tweetsArray, likeArray, Auth, $scope, $location, $rootScope, $firebaseObject, $firebaseArray) {
+  
+
   $scope.tweets = tweetsArray;
+  // $scope.tweets = [];
+  tweetsObject.$loaded().then(function(data){
+    angular.forEach("tweetsObject", function(value, key){
+      console.log(tweetsObject[key]);
+      // $scope.tweets.push({Author: item.Author, Time: item.Time, Tweet: marked(item.Tweet)});
+    });
+  });
+
+
   console.log(followingArray);
   usersObject.$loaded().then(function(data) {
     $scope.name = data[$rootScope.uid].Name;
@@ -8,7 +19,7 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
   });
 
 function nameAndCount() {
-  followingArray.$loaded().then(function() {
+  followingArray.$loaded().then(function(data) {
     $scope.followingCount = 0;
     $scope.followingNames = [];
     angular.forEach(followingArray, function(item){
@@ -18,10 +29,9 @@ function nameAndCount() {
         $scope.followingNames.push(item.following);
       }
     });
-    console.log($scope.followingNames);
   });
 }
-nameAndCount()
+nameAndCount();
 
 
   $scope.logOut = function() {
@@ -30,12 +40,14 @@ nameAndCount()
   };
 
   $scope.submitTweet = function() {
-    tweetsArray.$add({ Tweet: $scope.tweet, Author: $scope.email, Time: (new Date()).toLocaleString()});
+
+    tweetsArray.$add({ Tweet: $scope.markedTweet, Author: $scope.email, Time: (new Date()).toLocaleString()});
     $scope.tweet = "";
   };
   $scope.followUser = function() {
     followingArray.$add({following: $scope.userToFollow, Author: $scope.email});
     nameAndCount();
+    $scope.userToFollow = "";
 
   };
   $scope.likeTweet = function(tweet, author) {

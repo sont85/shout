@@ -15,6 +15,7 @@
     "bootstrap": "~3.3.5",
     "angularfire": "~1.1.2",
     "firebase": "~2.2.7",
-    "angular-route": "~1.4.1"
+    "angular-route": "~1.4.1",
+    "angular-marked": "~0.0.16"
   }
 }

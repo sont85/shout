@@ -1,30 +1,31 @@
-var app = angular.module("shout", ["firebase", "ngRoute"]);
+var app = angular.module("shout", ["firebase", "ngRoute", "hc.marked"]);
+var ref = new Firebase("https://shouting.firebaseio.com/");
 
 app.factory("Auth", function($firebaseAuth){
-  var ref = new Firebase("https://shouting.firebaseio.com/");
   return $firebaseAuth(ref);
 });
 
 app.factory("usersObject", function($firebaseObject){
-  var ref = new Firebase("https://shouting.firebaseio.com/");
   var usersRef = ref.child("users");
   return $firebaseObject(usersRef);
 });
 
+app.factory("tweetsObject", function($firebaseObject){
+  var tweetsRef = ref.child("Tweets");
+  return $firebaseObject(tweetsRef);
+});
+
 app.factory("tweetsArray", function($firebaseArray) {
-  var ref = new Firebase("https://shouting.firebaseio.com/");
   var tweetsRef = ref.child("Tweets");
   return $firebaseArray(tweetsRef);
 });
 
 app.factory("followingArray", function($firebaseArray) {
-  var ref = new Firebase("https://shouting.firebaseio.com/");
   var followingRef = ref.child("Following");
   return $firebaseArray(followingRef);
 });
 
 app.factory("likeArray", function($firebaseArray) {
-  var ref = new Firebase("https://shouting.firebaseio.com/");
   var likeRef = ref.child("Like");
   return $firebaseArray(likeRef);
 });
