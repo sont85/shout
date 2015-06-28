@@ -44,6 +44,20 @@ nameAndCount()
 
   };
 
+  $scope.tweetsFilter = function(item){
+    return $scope.followingNames.some(function(following){
+      console.log(following);
+      console.log(item.Author);
+      if (item.Author === following) {
+        return true;
+      } else if (item.Author === $scope.email) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  };
+
   // $scope.myFilter = function() {
   //   var filterArray = [];
   //   console.log(followingArray);
