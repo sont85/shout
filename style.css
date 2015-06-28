@@ -26,3 +26,7 @@ body {
 .loginDiv button {
 	margin: 8px;
 }
+.well {
+	width: 400px;
+	margin: auto;
+}
