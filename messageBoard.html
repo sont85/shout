@@ -33,7 +33,7 @@
 		<input type="text" class="form-control" placeholder="Search Tweets" ng-model="tweetSearch">
 		<div class="panel-heading"><h4 class="text-center panel-title">Tweets</h4></div>
 		<ul class="list-group">
-			<li ng-if="tweetsFilter(tweet)" ng-repeat="tweet in tweets | filter:tweetSearch track by $index" class="list-group-item">
+			<li ng-if="tweetsFilter(tweet)" ng-repeat="tweet in tweets | filter:tweetSearch | orderBy: tweet.Time track by $index" class="list-group-item">
 				<div class="text-center">
 					<button class="btn btn-default btn-sm" ng-click="likeTweet(tweet.Tweet, tweet.Author)" ng-hide="email === tweet.Author">Like</button>
 					<span class="h4">Author: {{tweet.Author}}</span>
@@ -65,9 +65,9 @@
 
 
 <div class="panel">
-	<div class="panel-heading"><h4 class="text-center panel-title"> Followers</h4></div>
+	<div class="panel-heading"><h4 class="text-center panel-title">{{followerCount}} Followers</h4></div>
 	<ul class="list-group">
-		<li ng-repeat="follower in followers" class="list-group-item">
+		<li ng-repeat="follower in followerNames" class="list-group-item">
 			{{follower}}
 		</li>
 	</ul>

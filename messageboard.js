@@ -7,21 +7,36 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
     $scope.email = data[$rootScope.uid].Email;
   });
 
-function nameAndCount() {
-  followingArray.$loaded().then(function() {
-    $scope.followingCount = 0;
-    $scope.followingNames = [];
-    angular.forEach(followingArray, function(item){
-      console.log(item.Author);
-      if (item.Author === $scope.email) {
-        $scope.followingCount += 1;
-        $scope.followingNames.push(item.following);
-      }
+  function getFollowers() {
+    $scope.followerNames = [];
+    $scope.followerCount = 0;
+    followingArray.$loaded().then(function(){
+      angular.forEach(followingArray, function(item){
+        console.log(item);
+        if (item.following === $scope.email) {
+          $scope.followerCount += 1;
+          $scope.followerNames.push(item.Author);
+        }
+      });
     });
-    console.log($scope.followingNames);
-  });
-}
-nameAndCount()
+  }
+
+  getFollowers();
+
+
+  function getFollowing() {
+    followingArray.$loaded().then(function() {
+      $scope.followingCount = 0;
+      $scope.followingNames = [];
+      angular.forEach(followingArray, function(item){
+        if (item.Author === $scope.email) {
+          $scope.followingCount += 1;
+          $scope.followingNames.push(item.following);
+        }
+      });
+    });
+  }
+  getFollowing();
 
 
   $scope.logOut = function() {
@@ -39,37 +54,16 @@ nameAndCount()
 
   };
   $scope.likeTweet = function(tweet, author) {
-    // likeArray.$add({Tweet: tweet, Author: $scope.email});
     tweetsArray.$add({ Tweet: "Retweet/Like: " + tweet, Author: author, Time: (new Date()).toLocaleString()});
-
   };
 
   $scope.tweetsFilter = function(item){
     return $scope.followingNames.some(function(following){
-      console.log(following);
-      console.log(item.Author);
       if (item.Author === following) {
         return true;
       } else if (item.Author === $scope.email) {
         return true;
-      } else {
-        return false;
       }
     });
   };
-
-  // $scope.myFilter = function() {
-  //   var filterArray = [];
-  //   console.log(followingArray);
-  //   followingArray.$loaded().then(function() {
-  //     angular.forEach("followingArray", function(item){
-  //       filterArray.push(item.following);
-  //       console.log(item.following);
-  //     });
-  //     filterArray.push($scope.email);
-  //     console.log(filterArray);
-  //     return filterArray;
-  //   });
-  // };
-
 });
