@@ -2,13 +2,13 @@ app.controller("MessageBoardCtrl", function(usersObject, tweetsObject, marked , 
   
 
   $scope.tweets = tweetsArray;
-  // $scope.tweets = [];
-  tweetsObject.$loaded().then(function(data){
-    angular.forEach("tweetsObject", function(value, key){
-      console.log(tweetsObject[key]);
-      // $scope.tweets.push({Author: item.Author, Time: item.Time, Tweet: marked(item.Tweet)});
-    });
-  });
+  // // $scope.tweets = [];
+  // tweetsObject.$loaded().then(function(data){
+  //   angular.forEach("tweetsObject", function(value, key){
+  //     console.log(tweetsObject[key]);
+  //     // $scope.tweets.push({Author: item.Author, Time: item.Time, Tweet: marked(item.Tweet)});
+  //   });
+  // });
 
 
   console.log(followingArray);

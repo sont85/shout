@@ -17,3 +17,18 @@ body {
 .list-group-item{
 	background-color: #AAA !important;
 }
+.loginDiv {
+	margin-top: 200px
+}
+.loginDiv button {
+	margin: 10px;
+}
+
+#shoutTitle {
+	color: #999;
+	font-size: 70px
+}
+
+.light-text {
+	color: #999;
+}
