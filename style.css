@@ -17,3 +17,12 @@ body {
 .list-group-item{
 	background-color: #AAA !important;
 }
+.light-text {
+	color: #666;
+}
+.loginDiv {
+	margin-top: 200px;
+}
+.loginDiv button {
+	margin: 8px;
+}

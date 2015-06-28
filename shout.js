@@ -1,4 +1,4 @@
-var app = angular.module("shout", ["firebase", "ngRoute"]);
+var app = angular.module("shout", ["firebase", "ngRoute", "hc.marked"]);
 
 app.factory("Auth", function($firebaseAuth){
   var ref = new Firebase("https://shouting.firebaseio.com/");
