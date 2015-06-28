@@ -54,10 +54,10 @@
 </div>
 
 <div class="panel">
-	<div class="panel-heading"><h4 class="text-center panel-title">{{followingCount}} Follow</h4></div>
+	<div class="panel-heading"><h4 class="text-center panel-title">{{followingCount}} Follows</h4></div>
 	<ul class="list-group">
-		<li ng-repeat="people in following | filter: email" class="list-group-item">
-			<h4>{{people.following}}</h4>by {{people.Author}}
+		<li ng-repeat="people in followingNames" class="list-group-item">
+			<h4>{{people}}</h4>
 		</li>
 	</ul>
 </div>

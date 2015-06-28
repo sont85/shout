@@ -7,16 +7,21 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
     $scope.email = data[$rootScope.uid].Email;
   });
 
-  $scope.following = followingArray;
+function nameAndCount() {
   followingArray.$loaded().then(function() {
     $scope.followingCount = 0;
+    $scope.followingNames = [];
     angular.forEach(followingArray, function(item){
       console.log(item.Author);
       if (item.Author === $scope.email) {
         $scope.followingCount += 1;
+        $scope.followingNames.push(item.following);
       }
     });
+    console.log($scope.followingNames);
   });
+}
+nameAndCount()
 
 
   $scope.logOut = function() {
@@ -30,6 +35,8 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
   };
   $scope.followUser = function() {
     followingArray.$add({following: $scope.userToFollow, Author: $scope.email});
+    nameAndCount();
+
   };
   $scope.likeTweet = function(tweet, author) {
     // likeArray.$add({Tweet: tweet, Author: $scope.email});
