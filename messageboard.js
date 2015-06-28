@@ -1,22 +1,23 @@
-app.controller("MessageBoardCtrl", function(usersObject, usersArray, Auth, $scope, $location, $rootScope, $firebaseObject, $firebaseArray) {
-  var ref = new Firebase("https://shouting.firebaseio.com/");
-  var usersRef = ref.child("users");
-  console.log($scope.users);
-
-  console.log(usersArray);  
-
-  usersObject.$loaded()
-  .then(function(data) {
-    var obj = data[$rootScope.authData.uid];
-    $scope.name = obj.Name;
-    $scope.userName = obj.UserName;
-    $scope.following = obj.Following;
-    $scope.tweets = obj.Tweets;
-    $scope.followers = obj.Followers;
-  })
-  .catch(function(error) {
-    console.error("Error:", error);
+app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsArray, likeArray, Auth, $scope, $location, $rootScope, $firebaseObject, $firebaseArray) {
+  $scope.tweets = tweetsArray;
+  console.log(followingArray);
+  usersObject.$loaded().then(function(data) {
+    $scope.name = data[$rootScope.uid].Name;
+    $scope.userName = data[$rootScope.uid].UserName;
+    $scope.email = data[$rootScope.uid].Email;
   });
+
+  $scope.following = followingArray;
+  followingArray.$loaded().then(function() {
+    $scope.followingCount = 0;
+    angular.forEach(followingArray, function(item){
+      console.log(item.Author);
+      if (item.Author === $scope.email) {
+        $scope.followingCount += 1;
+      }
+    });
+  });
+
 
   $scope.logOut = function() {
     Auth.$unauth();
@@ -24,17 +25,30 @@ app.controller("MessageBoardCtrl", function(usersObject, usersArray, Auth, $scop
   };
 
   $scope.submitTweet = function() {
-    var currentUser = $rootScope.authData.uid;
-    var currentUserRef = usersRef.child(currentUser);
-    currentUserRef.child("Tweets").push({tweet: $scope.tweet, time: "2pm", author: "author"});
+    tweetsArray.$add({ Tweet: $scope.tweet, Author: $scope.email, Time: (new Date()).toLocaleString()});
     $scope.tweet = "";
   };
   $scope.followUser = function() {
-    var currentUser = $rootScope.authData.uid;
-    var currentUserRef = usersRef.child(currentUser);
-    currentUserRef.child("Following").push($scope.userToFollow);
-    $scope.userToFollow = "";
+    followingArray.$add({following: $scope.userToFollow, Author: $scope.email});
   };
-  $scope.tweet = "";
+  $scope.likeTweet = function(tweet, author) {
+    // likeArray.$add({Tweet: tweet, Author: $scope.email});
+    tweetsArray.$add({ Tweet: "Retweet/Like: " + tweet, Author: author, Time: (new Date()).toLocaleString()});
+
+  };
+
+  // $scope.myFilter = function() {
+  //   var filterArray = [];
+  //   console.log(followingArray);
+  //   followingArray.$loaded().then(function() {
+  //     angular.forEach("followingArray", function(item){
+  //       filterArray.push(item.following);
+  //       console.log(item.following);
+  //     });
+  //     filterArray.push($scope.email);
+  //     console.log(filterArray);
+  //     return filterArray;
+  //   });
+  // };
 
 });

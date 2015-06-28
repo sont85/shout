@@ -11,11 +11,25 @@ app.factory("usersObject", function($firebaseObject){
   return $firebaseObject(usersRef);
 });
 
-app.factory("usersArray", function($firebaseArray) {
+app.factory("tweetsArray", function($firebaseArray) {
   var ref = new Firebase("https://shouting.firebaseio.com/");
-  var usersRef = ref.child("users");
-  return $firebaseArray(usersRef);
+  var tweetsRef = ref.child("Tweets");
+  return $firebaseArray(tweetsRef);
 });
+
+app.factory("followingArray", function($firebaseArray) {
+  var ref = new Firebase("https://shouting.firebaseio.com/");
+  var followingRef = ref.child("Following");
+  return $firebaseArray(followingRef);
+});
+
+app.factory("likeArray", function($firebaseArray) {
+  var ref = new Firebase("https://shouting.firebaseio.com/");
+  var likeRef = ref.child("Like");
+  return $firebaseArray(likeRef);
+});
+
+
 
 app.config(function ($routeProvider) {
   $routeProvider
