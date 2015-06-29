@@ -62,17 +62,18 @@ app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $lo
   Auth.$onAuth(function(authData){
     if (authData) {
       console.log("onAuth");
+      $scope.signIn = true;
       $rootScope.authData = authData;
       $rootScope.uid = authData.uid;
-      console.log($rootScope.uid);
-      console.log(authData);
-      $location.url("/messageboard");
+      console.log(authData.password.email)
+      $rootScope.email = authData.password.email;
     } else {
       console.log("offAuth");
     }
   });
   $scope.logOut = function() {
     Auth.$unauth();
+    $scope.signIn = false;
     $location.url("/");
   };
 });

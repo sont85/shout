@@ -27,6 +27,11 @@ app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
       email: $scope.email,
       password: $scope.password
     })
+    .then(function(authData) {
+      $location.url("/messageboard");
+      $rootScope.email = authData.password.email;
+      console.log(authData.password.email)
+    })
     .catch(function(error){
       console.log(error);
       $scope.error = error.code;

@@ -1,6 +1,5 @@
 app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsArray, likeArray, Auth, $scope, $location, $rootScope, $firebaseObject, $firebaseArray) {
   $scope.tweets = tweetsArray;
-  console.log(followingArray);
   usersObject.$loaded().then(function(data) {
     $scope.name = data[$rootScope.uid].Name;
     $scope.userName = data[$rootScope.uid].UserName;
@@ -12,7 +11,6 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
     $scope.followerCount = 0;
     followingArray.$loaded().then(function(){
       angular.forEach(followingArray, function(item){
-        console.log(item);
         if (item.following === $scope.email) {
           $scope.followerCount += 1;
           $scope.followerNames.push(item.Author);
@@ -53,9 +51,10 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
 
   $scope.tweetsFilter = function(item){
     return $scope.followingNames.some(function(following){
+      console.log("following: " + following, "tweet Author: " + item.Author, "currentuserEmail:" + $rootScope.email);
       if (item.Author === following) {
         return true;
-      } else if (item.Author === $scope.email) {
+      } else if (item.Author === $rootScope.email) {
         return true;
       }
     });
