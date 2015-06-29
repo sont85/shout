@@ -2,9 +2,7 @@
 	<button class="btn btn-info" data-target="#createUserModal" data-toggle="modal">Create User</button>
 	<button class="btn btn-primary" data-target="#logInModal" data-toggle="modal">Log In</button>
 </div>
-<h3 class="text-center light-text">Give A Shout Out</h3>
-
-
+<h3 class="light-text text-center">Give A Shout Out<h3>
 <div class="modal fade" id="logInModal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -54,6 +52,10 @@
 						<label>User Name</label>
 						<input type="text" placeholder="User Name" ng-model="userName" class="form-control">
 					</div>
+					<div class="form-group">
+						<label>Phone Number</label>
+						<input type="tel" placeholder="Phone Number" ng-model="phoneNumber" class="form-control">
+					</div>
 				<div class="modal-footer">
 					<button class="btn btn-default" data-dismiss="modal">Close</button>
 					<button ng-click="createUser()" class="btn btn-primary" data-dismiss="modal">Create User</button>
@@ -62,7 +64,5 @@
 		</div> 
 	</div>
 </div>
-
-
 <p ng-if="message">Message: <strong>{{ message }}</strong></p>
 <p ng-if="error">Error: <strong>{{error}}</strong></p>

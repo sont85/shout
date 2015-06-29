@@ -2,12 +2,20 @@
 <head>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body ng-app="shout" ng-controller="MainCtrl">
   <div class="container">
+    <ul class="nav nav-tabs navbar-default">
+      <li><a href="#/messageboard">Message Board</a></li>
+      <li><a href="#/follow">Followers List</a></li>
+      <li><a href="#/profile">Profile</a></li>
+      <li ng-show="!signIn" data-toggle="modal" data-target="#logInModal" class="pull-right"><a href="#/">Log In</a></li>
+      <li ng-show="signIn" class="pull-right" ng-click="logOut()"><a href="#/">Log Out</a></li>
+    </ul>
     <div id="header" class="text-center">
-      <h1 id="shoutTitle">Shout</h1>
+      <h2 class="light-text" style="font-size: 100px">Shout</h2>
     </div>
     <ng-view></ng-view>
   </div>

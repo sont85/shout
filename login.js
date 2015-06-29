@@ -13,7 +13,7 @@ app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
     .then(function(userData) {
       $scope.message = "User created with uid: " + userData.uid;
       var activeUserRef = usersRef.child(userData.uid);
-      activeUserRef.set({ Name: $scope.name, UserName: $scope.userName, Email: $scope.email});
+      activeUserRef.set({ Name: $scope.name, UserName: $scope.userName, Email: $scope.email, PhoneNumber: $scope.phoneNumber});
     })
     .catch(function(error) {
       console.log(error);
@@ -26,6 +26,11 @@ app.controller("LoginCtrl", function($scope, Auth, $location, $rootScope) {
     Auth.$authWithPassword({
       email: $scope.email,
       password: $scope.password
+    })
+    .then(function(authData) {
+      $location.url("/messageboard");
+      $rootScope.email = authData.password.email;
+      console.log(authData.password.email);
     })
     .catch(function(error){
       console.log(error);

@@ -14,21 +14,23 @@ body {
 	background-color: #2D3630;
 	color: white;
 }
-.list-group-item{
-	background-color: #AAA !important;
+.light-text {
+	color: #666;
 }
 .loginDiv {
-	margin-top: 200px
+	margin-top: 100px;
 }
 .loginDiv button {
-	margin: 10px;
+	margin: 8px;
 }
-
-#shoutTitle {
-	color: #999;
-	font-size: 70px
+.well {
+	width: 400px;
+	margin: auto;
+	margin-bottom: 20px;
 }
-
-.light-text {
-	color: #999;
+.tweet-heading {
+	margin-bottom: 7px;
+}
+.list-group-item{
+	background-color: #AAA !important;
 }
