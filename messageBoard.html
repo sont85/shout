@@ -3,6 +3,7 @@
 		<h4>Welcome {{name}}</h4>
 		<h4>User Name: {{userName}}</h4>
 		<h4>Email: {{email}}</h4>
+		<h4>Phone Number: {{phoneNumber}}</h4>
 	</div>
 </div>
 <div class="row">
@@ -39,14 +40,13 @@
 	<div class="panel">
 		<div class="panel-heading"><h4 class="text-center panel-title">Tweets</h4></div>
 		<ul class="list-group">
-			<li ng-if="tweetsFilter(tweet)" ng-repeat="tweet in tweets | filter:tweetSearch | orderBy: tweet.Time track by $index" class="list-group-item">
+			<li ng-show="tweetsFilter(tweet)"  ng-repeat="tweet in tweets | filter:tweetSearch | orderBy: tweet.Time track by $index" class="list-group-item">
 				<div class="text-center tweet-heading">
 					<span class="h4">Author: {{tweet.Author}}</span>
 					<span class="pull-right">{{tweet.Time}}</span>
 				</div>
 				<span class="h4">{{tweet.Tweet}}</span>
-					<a href="#" ng-click="likeTweet(tweet.Tweet, tweet.Author)" ng-hide="email === tweet.Author"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
-
+					<a href="#/messageboard" ng-click="likeTweet(tweet.Tweet, tweet.Author)" ng-hide="email === tweet.Author"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
 			</li>
 		</ul>
 	</div>

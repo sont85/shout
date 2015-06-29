@@ -24,6 +24,15 @@ app.config(function ($routeProvider) {
       }
     }
   })
+  .when("/profile", {
+    controller: "ProfileCtrl",
+    templateUrl: "profile.html",
+    resolve: {
+      currentAuth: function(Auth) {
+        return Auth.$requireAuth();
+      }
+    }
+  })
   .otherwise({
     redirectTo: "/"
   });
@@ -65,7 +74,7 @@ app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $lo
       $scope.signIn = true;
       $rootScope.authData = authData;
       $rootScope.uid = authData.uid;
-      console.log(authData.password.email)
+      console.log(authData.password.email);
       $rootScope.email = authData.password.email;
     } else {
       console.log("offAuth");
@@ -77,6 +86,3 @@ app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $lo
     $location.url("/");
   };
 });
-
-
-

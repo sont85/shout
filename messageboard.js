@@ -4,6 +4,9 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
     $scope.name = data[$rootScope.uid].Name;
     $scope.userName = data[$rootScope.uid].UserName;
     $scope.email = data[$rootScope.uid].Email;
+    console.log(data[$rootScope.uid].PhoneNumber);
+    $scope.phoneNumber = data[$rootScope.uid].PhoneNumber;
+
   });
 
   function getFollowers() {
@@ -11,7 +14,7 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
     $scope.followerCount = 0;
     followingArray.$loaded().then(function(){
       angular.forEach(followingArray, function(item){
-        if (item.following === $scope.email) {
+        if (item.following === $rootScope.email) {
           $scope.followerCount += 1;
           $scope.followerNames.push(item.Author);
         }
@@ -27,7 +30,7 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
       $scope.followingCount = 0;
       $scope.followingNames = [];
       angular.forEach(followingArray, function(item){
-        if (item.Author === $scope.email) {
+        if (item.Author === $rootScope.email) {
           $scope.followingCount += 1;
           $scope.followingNames.push(item.following);
         }
@@ -37,11 +40,11 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
   getFollowing();
 
   $scope.submitTweet = function() {
-    tweetsArray.$add({ Tweet: $scope.tweet, Author: $scope.email, Time: (new Date()).toLocaleString()});
+    tweetsArray.$add({ Tweet: $scope.tweet, Author: $rootScope.email, Time: (new Date()).toLocaleString()});
     $scope.tweet = "";
   };
   $scope.followUser = function() {
-    followingArray.$add({following: $scope.userToFollow, Author: $scope.email});
+    followingArray.$add({following: $scope.userToFollow, Author: $rootScope.email});
     getFollowing();
 
   };
@@ -50,13 +53,21 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
   };
 
   $scope.tweetsFilter = function(item){
+    if (item.Author === $rootScope.email) {
+      return true;
+    }
     return $scope.followingNames.some(function(following){
       console.log("following: " + following, "tweet Author: " + item.Author, "currentuserEmail:" + $rootScope.email);
-      if (item.Author === following) {
-        return true;
-      } else if (item.Author === $rootScope.email) {
-        return true;
-      }
+      return item.Author === following;
     });
   };
+});
+
+
+app.controller("ProfileCtrl", function($firebaseObject, $rootScope, $scope){
+    var ref = new Firebase("https://shouting.firebaseio.com/");
+    var usersRef = ref.child("users");
+    var currentUserRef = usersRef.child($rootScope.uid);
+    var syncObject = $firebaseObject(currentUserRef);
+    syncObject.$bindTo($scope, "editProfile");
 });
