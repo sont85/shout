@@ -1,0 +1,32 @@
+<div class="panel">
+	<div class="input-group">
+		<input type="text" ng-model="userToFollow" class="form-control" placeholder="User Name to Follow">
+		<span class="input-group-btn">
+			<button ng-click="followUser()" class="btn btn-primary">Follow</button>
+		</span>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel">
+			<div class="panel-heading">
+				<h4 class="text-center panel-title">{{followingCount}} Follows</h4>
+			</div>
+			<ul class="list-group">
+				<li ng-repeat="people in followingNames track by $index" class="list-group-item">
+					<h4>{{people}}</h4>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="panel">
+			<div class="panel-heading"><h4 class="text-center panel-title">{{followerCount}} Followers</h4></div>
+			<ul class="list-group">
+				<li ng-repeat="follower in followerNames track by $index" class="list-group-item">
+					{{follower}}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

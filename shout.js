@@ -1,5 +1,34 @@
 var app = angular.module("shout", ["firebase", "ngRoute", "hc.marked"]);
 
+app.config(function ($routeProvider) {
+  $routeProvider
+  .when("/", {
+    controller: "LoginCtrl",
+    templateUrl: "login.html"
+  })
+  .when("/messageboard", {
+    controller: "MessageBoardCtrl",
+    templateUrl: "messageboard.html",
+    resolve: {
+      currentAuth: function(Auth){
+        return Auth.$requireAuth();
+      }
+    }
+  })
+  .when("/follow", {
+    controller: "MessageBoardCtrl",
+    templateUrl: "follow.html",
+    resolve: {
+      currentAuth: function(Auth) {
+        return Auth.$requireAuth();
+      }
+    }
+  })
+  .otherwise({
+    redirectTo: "/"
+  });
+});
+
 app.factory("Auth", function($firebaseAuth){
   var ref = new Firebase("https://shouting.firebaseio.com/");
   return $firebaseAuth(ref);
@@ -29,30 +58,6 @@ app.factory("likeArray", function($firebaseArray) {
   return $firebaseArray(likeRef);
 });
 
-
-
-app.config(function ($routeProvider) {
-  $routeProvider
-  .when("/", {
-    controller: "LoginCtrl",
-    templateUrl: "login.html"
-  })
-  .when("/messageboard", {
-    controller: "MessageBoardCtrl",
-    templateUrl: "messageboard.html",
-    resolve: {
-      currentAuth: function(Auth){
-        return Auth.$requireAuth();
-      }
-    }
-  })
-  .otherwise({
-    redirectTo: "/"
-  });
-});
-
-
-
 app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $location) {
   Auth.$onAuth(function(authData){
     if (authData) {
@@ -66,6 +71,10 @@ app.controller("MainCtrl", function($scope, Auth, $rootScope, $firebaseAuth, $lo
       console.log("offAuth");
     }
   });
+  $scope.logOut = function() {
+    Auth.$unauth();
+    $location.url("/");
+  };
 });
 
 

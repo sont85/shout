@@ -38,19 +38,13 @@ app.controller("MessageBoardCtrl", function(usersObject, followingArray, tweetsA
   }
   getFollowing();
 
-
-  $scope.logOut = function() {
-    Auth.$unauth();
-    $location.url("/");
-  };
-
   $scope.submitTweet = function() {
     tweetsArray.$add({ Tweet: $scope.tweet, Author: $scope.email, Time: (new Date()).toLocaleString()});
     $scope.tweet = "";
   };
   $scope.followUser = function() {
     followingArray.$add({following: $scope.userToFollow, Author: $scope.email});
-    nameAndCount();
+    getFollowing();
 
   };
   $scope.likeTweet = function(tweet, author) {

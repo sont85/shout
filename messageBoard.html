@@ -1,12 +1,19 @@
-<div>
-  <button ng-click="logOut()" class="btn btn-default pull-right">Log Out</button>
+<div class="row">
+	<div class="well text-center">
+		<h4>Welcome {{name}}</h4>
+		<h4>User Name: {{userName}}</h4>
+		<h4>Email: {{email}}</h4>
+	</div>
 </div>
-<div class="well text-center">
-	<h3>Welcome {{name}}</h3>
-	<h3>User Name: {{userName}}</h3>
-	<h3>Email: {{email}}
+<div class="row">
+	<div class="col-xs-6">
+		<div class="input-group">
+			<span class="input-group-addon">Search Filter</span>
+			<input type="text" class="form-control" placeholder="Search Tweets" ng-model="tweetSearch">
+		</div>
+	</div>
+		<button class="btn btn-primary btn-lg" data-target="#tweetModal" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Tweet</button>
 </div>
-<button class="btn btn-primary btn-lg" data-target="#tweetModal" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span> Tweet</button>
 
 <div id="tweetModal" class="modal fade">
 	<div class="modal-dialog">
@@ -30,45 +37,17 @@
 
 <div>
 	<div class="panel">
-		<input type="text" class="form-control" placeholder="Search Tweets" ng-model="tweetSearch">
 		<div class="panel-heading"><h4 class="text-center panel-title">Tweets</h4></div>
 		<ul class="list-group">
-			<li ng-if="tweetsFilter(tweet)" ng-repeat="tweet in tweets | filter:tweetSearch | orderBy: tweet.Time track by $index" class="list-group-item">
-				<div class="text-center">
-					<button class="btn btn-default btn-sm" ng-click="likeTweet(tweet.Tweet, tweet.Author)" ng-hide="email === tweet.Author">Like</button>
+			<li ng-if="tweetsFilter(tweet)" ng-repeat="tweet in tweets | filter:tweetSearch | orderBy: tweet.Time | limitTo: 20 track by $index" class="list-group-item">
+				<div class="text-center tweet-heading">
 					<span class="h4">Author: {{tweet.Author}}</span>
 					<span class="pull-right">{{tweet.Time}}</span>
 				</div>
-				<h4>{{tweet.Tweet}}</h4>
+				<span class="h4">{{tweet.Tweet}}</span>
+					<a href="#" ng-click="likeTweet(tweet.Tweet, tweet.Author)" ng-hide="email === tweet.Author"><i class="fa fa-thumbs-o-up fa-2x"></i></a>
+
 			</li>
 		</ul>
 	</div>
-</div>
-
-<div class="panel">
-	<div class="input-group">
-		<input type="text" ng-model="userToFollow" class="form-control" placeholder="User Name to Follow">
-		<span class="input-group-btn">
-			<button ng-click="followUser()" class="btn btn-primary">Follow</button>
-		</span>
-	</div>
-</div>
-
-<div class="panel">
-	<div class="panel-heading"><h4 class="text-center panel-title">{{followingCount}} Follows</h4></div>
-	<ul class="list-group">
-		<li ng-repeat="people in followingNames" class="list-group-item">
-			<h4>{{people}}</h4>
-		</li>
-	</ul>
-</div>
-
-
-<div class="panel">
-	<div class="panel-heading"><h4 class="text-center panel-title">{{followerCount}} Followers</h4></div>
-	<ul class="list-group">
-		<li ng-repeat="follower in followerNames" class="list-group-item">
-			{{follower}}
-		</li>
-	</ul>
 </div>
