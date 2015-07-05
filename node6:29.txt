@@ -1,0 +1,16 @@
+-endpoint defines behavior of app.
+-use framework give access to endpoint so we dont have too many if statement
+-express perform mainly the routing of end url
+-express expressTest, create expressTest folder
+-morgan module is for log in
+-routes and users is requiring a local file
+-jade allows code embeded into the html.
+-express use many layers to control request and give response.
+-each layer perform a specific task in a cascading effect
+-app.use is the layers
+-bin/www to run express
+
+npm install to install the dependencies, npm start to run the start script, then go to localhost:3000
+node .bin/www to start
+type env to check for environment variable
+

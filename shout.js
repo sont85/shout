@@ -1,4 +1,4 @@
-var app = angular.module("shout", ["firebase", "ngRoute", "hc.marked"]);
+var app = angular.module("shout", ["firebase", "ngRoute"]);
 
 app.config(function ($routeProvider) {
   $routeProvider
@@ -20,6 +20,7 @@ app.config(function ($routeProvider) {
     templateUrl: "follow.html",
     resolve: {
       currentAuth: function(Auth) {
+        console.log(Auth.$requireAuth());
         return Auth.$requireAuth();
       }
     }
