@@ -8,7 +8,7 @@ app.config(function ($routeProvider) {
   })
   .when("/messageboard", {
     controller: "MessageBoardCtrl",
-    templateUrl: "messageboard.html",
+    templateUrl: "messageBoard.html",
     resolve: {
       currentAuth: function(Auth){
         return Auth.$requireAuth();
